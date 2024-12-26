@@ -15,3 +15,8 @@ Set default profile.
 ```
 awscpm df <profile>
 ```
+
+Add profile.
+```
+awscpm ap <profile> <access_key_id> <secret_access_key>
+```
