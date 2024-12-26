@@ -8,7 +8,7 @@ AWS CLI profile manager helps with multiple AWS profiles. Providing --profile wi
 
 1. Download source code.
 2. Build project ```go build acpm.exe```.
-3. Move create directory $HOME/acpm and move acpm.exe there.
+3. Create directory $HOME/acpm and move acpm.exe there.
 4. Add executable to path environment variable.
 5. Run program with available commands.
 
