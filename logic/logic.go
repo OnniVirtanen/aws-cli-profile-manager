@@ -61,13 +61,18 @@ func SetDefault(profile string) error {
 	profiles := strings.Split(pdata, "\n")
 	aws_access_key_id := ""
 	aws_secret_access_key := ""
+	profileFound := false
 	for _, element := range profiles {
 		if !strings.Contains(element, profile) {
 			continue
 		}
+		profileFound = true
 		columns := strings.Split(element, ";")
 		aws_access_key_id = columns[2]
 		aws_secret_access_key = columns[3]
+	}
+	if !profileFound {
+		return errors.New("no profile found with specified name")
 	}
 
 	credentials := fmt.Sprintf("[default]\naws_access_key_id=%s\naws_secret_access_key=%s", aws_access_key_id, aws_secret_access_key)
@@ -77,16 +82,7 @@ func SetDefault(profile string) error {
 	}
 
 	data := fmt.Sprintf("default;%s", profile)
-	defFile, err := os.OpenFile(dir+DEFAULT_FILE, os.O_WRONLY|os.O_CREATE, 0644)
-	if err != nil {
-		return err
-	}
-	_, err = fmt.Fprintln(defFile, data)
-	if err != nil {
-		defFile.Close()
-		return err
-	}
-	err = defFile.Close()
+	err = os.WriteFile(dir+DEFAULT_FILE, []byte(data), 0644)
 	if err != nil {
 		return err
 	}
