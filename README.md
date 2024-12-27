@@ -36,15 +36,15 @@ apm show default
 
 Set default profile.
 ```
-apm df <profile>
+apm default <profile>
 ```
 
 Add profile.
 ```
-apm ap <profile> <access_key_id> <secret_access_key>
+apm add <profile> <access_key_id> <secret_access_key>
 ```
 
 Remove profile.
 ```
-apm rp <profile>
+apm rmv <profile>
 ```
