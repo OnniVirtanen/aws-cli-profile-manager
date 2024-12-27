@@ -19,7 +19,7 @@ func main() {
 		log.Fatalln(UNVALID_ARGUMENT)
 	}
 
-	if os.Args[1] == "--help" {
+	if os.Args[1] == "--help" && argCount == 2 {
 		c1 := "  apm --help                                             list available commands"
 		c2 := "  apm default <profile>                                  set default profile"
 		c3 := "  apm ls                                                 list available profiles"
