@@ -12,12 +12,12 @@ func main() {
 	argCount := len(os.Args)
 
 	if os.Args[1] == "--help" {
-		c1 := "'acpm --help'                                           list available commands"
-		c2 := "'acpm df <profile>'                                     set default profile"
-		c3 := "'acpm ls'                                               list available profiles"
-		c4 := "'acpm show default'                                     show current default profile"
-		c5 := "'acpm ap <profile> <access_key_id> <secret_access_key>' add profile"
-		c6 := "'acpm rp <profile>'                                     remove profile"
+		c1 := "'apm --help'                                           list available commands"
+		c2 := "'apm df <profile>'                                     set default profile"
+		c3 := "'apm ls'                                               list available profiles"
+		c4 := "'apm show default'                                     show current default profile"
+		c5 := "'apm ap <profile> <access_key_id> <secret_access_key>' add profile"
+		c6 := "'apm rp <profile>'                                     remove profile"
 		log.Printf("Available commands are\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6)
 	} else if os.Args[1] == "df" && argCount == 3 {
 		err := logic.SetDefault(os.Args[2])
@@ -47,7 +47,7 @@ func main() {
 		}
 		log.Printf("Removed profile <%s> successfully.", os.Args[2])
 	} else {
-		const text = "See 'acpm --help'."
+		const text = "See 'apm --help'."
 		log.Fatalf("Not valid argument. %s\n", text)
 	}
 }

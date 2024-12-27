@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-const PROFILE_FILE = "/acpm/profiles"
-const DEFAULT_FILE = "/acpm/default"
+const PROFILE_FILE = "/apm/profiles"
+const DEFAULT_FILE = "/apm/default"
 const CREDENTIALS_FILE = "/.aws/credentials"
 
 func GetProfiles() (string, error) {
