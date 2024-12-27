@@ -19,14 +19,14 @@ func main() {
 	}
 
 	if os.Args[1] == "--help" {
-		c1 := "'apm --help'                                           list available commands"
-		c2 := "'apm df <profile>'                                     set default profile"
-		c3 := "'apm ls'                                               list available profiles"
-		c4 := "'apm show default'                                     show current default profile"
-		c5 := "'apm ap <profile> <access_key_id> <secret_access_key>' add profile"
-		c6 := "'apm rp <profile>'                                     remove profile"
-		c7 := "'apm --v'                                              show current version"
-		log.Printf("Available commands are\n%s\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6, c7)
+		c1 := "  apm --help                                             list available commands"
+		c2 := "  apm df <profile>                                       set default profile"
+		c3 := "  apm ls                                                 list available profiles"
+		c4 := "  apm show default                                       show current default profile"
+		c5 := "  apm ap <profile> <access_key_id> <secret_access_key>   add profile"
+		c6 := "  apm rp <profile>                                       remove profile"
+		c7 := "  apm --v                                                show current version"
+		log.Printf("These are all available apm commands:\n%s\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6, c7)
 	} else if os.Args[1] == "df" && argCount == 3 {
 		err := logic.SetDefault(os.Args[2])
 		if err != nil {
@@ -55,7 +55,7 @@ func main() {
 		}
 		log.Printf("Removed profile <%s> successfully.", os.Args[2])
 	} else if os.Args[1] == "--v" && argCount == 2 {
-		log.Printf("Current version of apm is %s\n", VERSION)
+		log.Printf("apm version %s\n", VERSION)
 	} else {
 		log.Fatalln(UNVALID_ARGUMENT)
 	}
