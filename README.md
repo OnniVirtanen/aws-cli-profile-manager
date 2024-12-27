@@ -7,44 +7,13 @@ AWS CLI profile manager helps with multiple AWS profiles. Providing --profile wi
 ## Installation steps
 
 1. Download source code.
-2. Build project ```go build -o apm.exe```.
-3. Create directory $HOME/apm and move apm.exe there.
-4. Add executable to path environment variable.
-5. Run program with available commands.
+2. Build project ```go build -o aws-profile.exe```.
+3. Add executable to path environment variable.
+4. Run program with available commands.
 
 ## Available commands
 
-Show available commands.
-```
-apm --help
-```
-
-Show current version.
-```
-apm --v
-```
-
-List all profiles.
-```
-apm ls
-```
-
-Show default profile.
-```
-apm show default
-```
-
 Set default profile.
 ```
-apm df <profile>
-```
-
-Add profile.
-```
-apm ap <profile> <access_key_id> <secret_access_key>
-```
-
-Remove profile.
-```
-apm rp <profile>
+aws-profile <profile>
 ```
