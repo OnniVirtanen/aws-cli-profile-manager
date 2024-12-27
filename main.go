@@ -8,8 +8,15 @@ import (
 	"github.com/onni.virtanen/aws.cli.profile.manager/logic"
 )
 
+const VERSION = "1.0"
+const UNVALID_ARGUMENT = "Not valid argument. See 'apm --help'."
+
 func main() {
 	argCount := len(os.Args)
+
+	if argCount == 1 {
+		log.Fatalln(UNVALID_ARGUMENT)
+	}
 
 	if os.Args[1] == "--help" {
 		c1 := "'apm --help'                                           list available commands"
@@ -18,7 +25,8 @@ func main() {
 		c4 := "'apm show default'                                     show current default profile"
 		c5 := "'apm ap <profile> <access_key_id> <secret_access_key>' add profile"
 		c6 := "'apm rp <profile>'                                     remove profile"
-		log.Printf("Available commands are\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6)
+		c7 := "'apm --v'                                              show current version"
+		log.Printf("Available commands are\n%s\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6, c7)
 	} else if os.Args[1] == "df" && argCount == 3 {
 		err := logic.SetDefault(os.Args[2])
 		if err != nil {
@@ -46,8 +54,9 @@ func main() {
 			log.Fatalf("Could not remve AWS profile: %s", err)
 		}
 		log.Printf("Removed profile <%s> successfully.", os.Args[2])
+	} else if os.Args[1] == "--v" && argCount == 2 {
+		log.Printf("Current version of apm is %s\n", VERSION)
 	} else {
-		const text = "See 'apm --help'."
-		log.Fatalf("Not valid argument. %s\n", text)
+		log.Fatalln(UNVALID_ARGUMENT)
 	}
 }
