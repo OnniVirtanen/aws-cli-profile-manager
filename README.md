@@ -8,9 +8,8 @@ AWS CLI profile manager helps with multiple AWS profiles. Providing --profile wi
 
 1. Download source code.
 2. Build project ```go build -o apm.exe```.
-3. Create directory $HOME/apm and move apm.exe there.
-4. Add executable to path environment variable.
-5. Run program with available commands.
+3. Add executable to path environment variable.
+4. Run program with available commands.
 
 ## Available commands
 
