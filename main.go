@@ -47,8 +47,12 @@ func main() {
 				fmt.Println(columns[1])
 			}
 		}
-	} else if os.Args[1] == "add" && argCount == 5 {
-		logic.AddProfile([3]string{os.Args[2], os.Args[3], os.Args[4]})
+	} else if os.Args[1] == "add" && (argCount == 5 || argCount == 6) {
+		token := ""
+		if argCount == 6 {
+			token = os.Args[5]
+		}
+		logic.AddProfile([4]string{os.Args[2], os.Args[3], os.Args[4], token})
 	} else if os.Args[1] == "show" && os.Args[2] == "default" && argCount == 3 {
 		data, err := logic.GetDefault()
 		if err != nil {

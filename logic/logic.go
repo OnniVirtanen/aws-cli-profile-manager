@@ -25,13 +25,13 @@ func GetProfiles() (string, error) {
 	return string(data), nil
 }
 
-func AddProfile(arr [3]string) error {
+func AddProfile(arr [4]string) error {
 	dir, err := os.UserHomeDir()
 	if err != nil {
 		return err
 	}
 
-	data := fmt.Sprintf("profile;%s;%s;%s", arr[0], arr[1], arr[2])
+	data := fmt.Sprintf("profile;%s;%s;%s;%s", arr[0], arr[1], arr[2], arr[3])
 	file, err := os.OpenFile(dir+PROFILE_FILE, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
@@ -61,6 +61,7 @@ func SetDefault(profile string) error {
 	profiles := strings.Split(pdata, "\n")
 	aws_access_key_id := ""
 	aws_secret_access_key := ""
+	aws_session_token := ""
 	profileFound := false
 	for _, element := range profiles {
 		if !strings.Contains(element, profile) {
@@ -70,12 +71,21 @@ func SetDefault(profile string) error {
 		columns := strings.Split(element, ";")
 		aws_access_key_id = columns[2]
 		aws_secret_access_key = columns[3]
+		if len(columns) == 5 {
+			aws_session_token = columns[4]
+		}
 	}
 	if !profileFound {
 		return errors.New("no profile found with specified name")
 	}
 
-	credentials := fmt.Sprintf("[default]\naws_access_key_id=%s\naws_secret_access_key=%s", aws_access_key_id, aws_secret_access_key)
+	credentials := ""
+	if aws_session_token != "" {
+		credentials = fmt.Sprintf("[default]\naws_access_key_id=%s\naws_secret_access_key=%s\naws_session_token=%s", aws_access_key_id, aws_secret_access_key, aws_session_token)
+	} else {
+		credentials = fmt.Sprintf("[default]\naws_access_key_id=%s\naws_secret_access_key=%s", aws_access_key_id, aws_secret_access_key)
+	}
+
 	err = os.WriteFile(dir+CREDENTIALS_FILE, []byte(credentials), 0644)
 	if err != nil {
 		return err
