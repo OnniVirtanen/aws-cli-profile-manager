@@ -52,7 +52,11 @@ func main() {
 		if argCount == 6 {
 			token = os.Args[5]
 		}
-		logic.AddProfile([4]string{os.Args[2], os.Args[3], os.Args[4], token})
+		err := logic.AddProfile([4]string{os.Args[2], os.Args[3], os.Args[4], token})
+		if err != nil {
+			log.Fatalf("Could not add profile: %s", err)
+		}
+		fmt.Printf("Added AWS profile: %s\n", os.Args[2])
 	} else if os.Args[1] == "show" && os.Args[2] == "default" && argCount == 3 {
 		data, err := logic.GetDefault()
 		if err != nil {
