@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-const PROFILE_FILE = "/.aws/profiles"
-const DEFAULT_FILE = "/.aws/default"
+const PROFILES_FILE = "/.aws/profiles"
+const DEFAULT_PROFILE_FILE = "/.aws/default"
 const CREDENTIALS_FILE = "/.aws/credentials"
 
 func GetProfiles() (string, error) {
@@ -17,7 +17,7 @@ func GetProfiles() (string, error) {
 		return "", err
 	}
 
-	data, err := os.ReadFile(dir + PROFILE_FILE)
+	data, err := os.ReadFile(dir + PROFILES_FILE)
 	if err != nil {
 		return "", errors.New("no profiles added")
 	}
@@ -32,7 +32,7 @@ func AddProfile(arr [4]string) error {
 	}
 
 	data := fmt.Sprintf("profile;%s;%s;%s;%s", arr[0], arr[1], arr[2], arr[3])
-	file, err := os.OpenFile(dir+PROFILE_FILE, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	file, err := os.OpenFile(dir+PROFILES_FILE, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
@@ -92,7 +92,7 @@ func SetDefault(profile string) error {
 	}
 
 	data := fmt.Sprintf("default;%s", profile)
-	err = os.WriteFile(dir+DEFAULT_FILE, []byte(data), 0644)
+	err = os.WriteFile(dir+DEFAULT_PROFILE_FILE, []byte(data), 0644)
 	if err != nil {
 		return err
 	}
@@ -106,7 +106,7 @@ func GetDefault() (string, error) {
 		return "", err
 	}
 
-	data, err := os.ReadFile(dir + DEFAULT_FILE)
+	data, err := os.ReadFile(dir + DEFAULT_PROFILE_FILE)
 	if err != nil {
 		return "", errors.New("no default profile")
 	}
@@ -138,7 +138,7 @@ func RemoveProfile(profile string) error {
 		return errors.New("no profile found with specified name")
 	}
 
-	err = os.WriteFile(dir+PROFILE_FILE, []byte(profilesModified), 0644)
+	err = os.WriteFile(dir+PROFILES_FILE, []byte(profilesModified), 0644)
 	if err != nil {
 		return err
 	}
