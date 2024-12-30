@@ -9,7 +9,7 @@ import (
 	"github.com/onni.virtanen/aws.cli.profile.manager/logic"
 )
 
-const VERSION = "1.0"
+const VERSION = "1.0.1"
 const UNVALID_ARGUMENT = "Not valid argument. See 'apm --help'."
 
 func main() {
@@ -20,13 +20,13 @@ func main() {
 	}
 
 	if os.Args[1] == "--help" && argCount == 2 {
-		c1 := "  apm --help                                             list available commands"
-		c2 := "  apm default <profile>                                  set default profile"
-		c3 := "  apm ls                                                 list available profiles"
-		c4 := "  apm show default                                       show current default profile"
-		c5 := "  apm add <profile> <access_key_id> <secret_access_key>  add profile"
-		c6 := "  apm rmv <profile>                                      remove profile"
-		c7 := "  apm --v                                                show current version"
+		c1 := "  apm --help                                                                 list available commands"
+		c2 := "  apm default <profile>                                                      set default profile"
+		c3 := "  apm ls                                                                     list available profiles"
+		c4 := "  apm show default                                                           show current default profile"
+		c5 := "  apm add <profile> <access_key_id> <secret_access_key> [aws_session_token]  add profile"
+		c6 := "  apm rmv <profile>                                                          remove profile"
+		c7 := "  apm --v                                                                    show current version"
 		log.Printf("These are all available apm commands:\n%s\n%s\n%s\n%s\n%s\n%s\n%s", c1, c2, c3, c4, c5, c6, c7)
 	} else if os.Args[1] == "default" && argCount == 3 {
 		err := logic.SetDefault(os.Args[2])

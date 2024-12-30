@@ -38,9 +38,9 @@ Set default profile.
 apm default <profile>
 ```
 
-Add profile (aws_session_token is optional).
+Add profile (aws_session_token must be provided when using temporary credentials).
 ```
-apm add <profile> <access_key_id> <secret_access_key> <aws_session_token>
+apm add <profile> <access_key_id> <secret_access_key> [aws_session_token]
 ```
 
 Remove profile.
